@@ -17,10 +17,6 @@ body {
   flex-wrap: wrap;
 }
 
-.column-full {
-  display: flex;
-}
-
 .column-full,
 .column-half {
   width: 100%;
@@ -43,24 +39,20 @@ header {
 .column-full > h2 {
   color: white;
   font-family: "Proza Libre", sans-serif;
-  font-style: normal;
   font-weight: 400;
   font-size: 20px;
   line-height: 27px;
-  margin: auto;
   background-color: #562b81;
 }
 
 #new-entry {
-  margin-top: 4rem;
+  margin-top: 2rem;
   font-family: "Proza Libre", sans-serif;
-  font-style: normal;
   font-weight: 600;
 }
 
 label {
   font-family: "Proza Libre", sans-serif;
-  font-style: normal;
   font-weight: 600;
 }
 
@@ -82,13 +74,25 @@ input {
   background-color: white;
   border: 1px solid #b6b6b6;
   height: 2rem;
+  font-family: "Proza Libre", sans-serif;
+}
+
+textarea {
+  font-family:
+    "Proza Libre",
+    sans-serif;
+}
+
+input:focus,
+textarea:focus {
+  border: 3px solid;
+  border-color: #562b81;
 }
 
 input[type="submit"] {
   color: white;
   background-color: #562b81;
   font-family: "Open Sans", sans-serif;
-  font-style: normal;
   font-size: 16px;
   line-height: 22px;
   max-width: 5rem;
