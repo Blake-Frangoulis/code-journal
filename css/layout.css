@@ -72,6 +72,7 @@ label[for="notes"] {
 #notes {
   height: 10rem;
   width: 100%;
+  font-size: large;
 }
 
 input {
