@@ -6,3 +6,21 @@ function imgChange(event) {
 }
 
 $imgInput.addEventListener('input', imgChange);
+
+const $form = document.querySelector('form');
+
+function formStore(event) {
+  event.preventDefault();
+  const entry = {
+    title: $form.elements.title.value,
+    photoUrl: $imgSrc.getAttribute('src'),
+    notes: $form.elements.notes.value,
+    entryId: data.nextEntryId
+  };
+  data.nextEntryId++;
+  data.entries.unshift(entry);
+  $imgSrc.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $form.reset();
+}
+
+$form.addEventListener('submit', formStore);
