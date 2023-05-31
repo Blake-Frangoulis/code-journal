@@ -13,7 +13,7 @@ function formStore(event) {
   event.preventDefault();
   const entry = {
     title: $form.elements.title.value,
-    photoUrl: $imgSrc.getAttribute('src'),
+    photoUrl: $form.elements['photo-url'].value,
     notes: $form.elements.notes.value,
     entryId: data.nextEntryId
   };
