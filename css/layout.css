@@ -1,3 +1,7 @@
+body {
+  background-color: #f0f0f0;
+}
+
 .hidden {
   display: none !important;
 }
@@ -16,6 +20,88 @@
 .column-full,
 .column-half {
   width: 100%;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#img {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+header {
+  background-color: #562b81;
+}
+
+.column-full > h2 {
+  color: white;
+  font-family: "Proza Libre", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+  background-color: #562b81;
+}
+
+#new-entry {
+  margin-top: 2rem;
+  font-family: "Proza Libre", sans-serif;
+  font-weight: 600;
+}
+
+label {
+  font-family: "Proza Libre", sans-serif;
+  font-weight: 600;
+}
+
+label[for="notes"] {
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+#notes {
+  height: 10rem;
+  width: 100%;
+  font-size: large;
+}
+
+input {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #b6b6b6;
+  height: 2rem;
+  font-family: "Proza Libre", sans-serif;
+}
+
+textarea {
+  font-family:
+    "Proza Libre",
+    sans-serif;
+}
+
+input:focus,
+textarea:focus {
+  border: 3px solid;
+  border-color: #562b81;
+}
+
+input[type="submit"] {
+  color: white;
+  background-color: #562b81;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  line-height: 22px;
+  max-width: 5rem;
+  border-radius: 4px;
+}
+
+.submit {
+  display: flex;
+  justify-content: flex-end;
 }
 
 @media screen and (min-width: 768px) {
