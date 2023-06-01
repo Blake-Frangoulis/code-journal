@@ -24,3 +24,41 @@ function formStore(event) {
 }
 
 $form.addEventListener('submit', formStore);
+
+function renderEntry(entry) {
+  const $entryRendered = document.createElement('li');
+
+  const $divRow = document.createElement('div');
+  $divRow.classList.add('row');
+  $entryRendered.appendChild($divRow);
+
+  const $divHalf1 = document.createElement('div');
+  $divHalf1.classList.add('column-half');
+  $divRow.appendChild($divHalf1);
+
+  const $img = document.createElement('img');
+  $img.setAttribute('src', entry.photoUrl);
+  $divHalf1.appendChild($img);
+
+  const $divHalf2 = document.createElement('div');
+  $divHalf1.classList.add('column-half');
+  $divRow.appendChild($divHalf2);
+
+  const $h1 = document.createElement('h1');
+  $h1.textContent = entry.title;
+  $divHalf2.appendChild($h1);
+
+  const $p = document.createElement('p');
+  $p.textContent = entry.notes;
+  $divHalf2.appendChild($p);
+
+  return $entryRendered;
+}
+
+const $ul = document.querySelector('ul');
+document.addEventListener('DOMContentLoaded', function (event) {
+  for (let i = 0; i < data.entries.length; i++) {
+    const output = renderEntry(data.entries[i]);
+    $ul.appendChild(output);
+  }
+});
