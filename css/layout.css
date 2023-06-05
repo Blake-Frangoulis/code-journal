@@ -139,3 +139,29 @@ li {
   list-style: none;
   line-height: 150%;
 }
+
+#new-button {
+  background-color: #562b81;
+  text-decoration: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.anchor {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#entries-anchor {
+  color: white;
+  text-decoration: none;
+  padding-left: 1rem;
+  font-family: "Open Sans", sans-serif;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+}
