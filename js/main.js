@@ -20,6 +20,12 @@ function formStore(event) {
   data.nextEntryId++;
   data.entries.unshift(entry);
   $imgSrc.setAttribute('src', 'images/placeholder-image-square.jpg');
+
+  // renderEntry(entry);
+  $ul.prepend(renderEntry(entry));
+  viewSwap('entries');
+  toggleNoEntries(data.entries.length);
+
   $form.reset();
 }
 
@@ -61,16 +67,18 @@ document.addEventListener('DOMContentLoaded', function (event) {
     const output = renderEntry(data.entries[i]);
     $ul.appendChild(output);
   }
+  viewSwap(data.view);
+  toggleNoEntries(data.entries.length);
 });
 
-// const $noEntries = document.querySelector('.no-entries');
-// function toggleNoEntries() {
-//   if (data.entries.length === 0) {
-//     $noEntries.classList.remove('hidden');
-//   } else {
-//     $noEntries.classList.add('hidden');
-//   }
-// }
+const $noEntries = document.querySelector('.no-entries');
+function toggleNoEntries() {
+  if (data.entries.length === 0) {
+    $noEntries.classList.remove('hidden');
+  } else {
+    $noEntries.classList.add('hidden');
+  }
+}
 
 const $dataViewEntries = document.querySelector('[data-view="entries"');
 const $dataEntryForm = document.querySelector('[data-view="entry-form"]');
@@ -88,4 +96,10 @@ function viewSwap(view) {
 const $entriesAnchor = document.querySelector('#entries-anchor');
 $entriesAnchor.addEventListener('click', function (event) {
   viewSwap('entries');
+  toggleNoEntries(data.entries.length);
+});
+
+const $newButton = document.querySelector('#new-button');
+$newButton.addEventListener('click', function (event) {
+  viewSwap('entry-form');
 });
