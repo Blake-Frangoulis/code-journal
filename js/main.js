@@ -21,10 +21,9 @@ function formStore(event) {
   data.entries.unshift(entry);
   $imgSrc.setAttribute('src', 'images/placeholder-image-square.jpg');
 
-  // renderEntry(entry);
   $ul.prepend(renderEntry(entry));
   viewSwap('entries');
-  toggleNoEntries(data.entries.length);
+  toggleNoEntries();
 
   $form.reset();
 }
@@ -44,6 +43,7 @@ function renderEntry(entry) {
 
   const $img = document.createElement('img');
   $img.setAttribute('src', entry.photoUrl);
+  $img.setAttribute('alt', 'uploaded-image');
   $divHalf1.appendChild($img);
 
   const $divHalf2 = document.createElement('div');
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
     $ul.appendChild(output);
   }
   viewSwap(data.view);
-  toggleNoEntries(data.entries.length);
+  toggleNoEntries();
 });
 
 const $noEntries = document.querySelector('.no-entries');
@@ -96,7 +96,7 @@ function viewSwap(view) {
 const $entriesAnchor = document.querySelector('#entries-anchor');
 $entriesAnchor.addEventListener('click', function (event) {
   viewSwap('entries');
-  toggleNoEntries(data.entries.length);
+  toggleNoEntries();
 });
 
 const $newButton = document.querySelector('#new-button');
