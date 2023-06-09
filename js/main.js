@@ -17,14 +17,33 @@ function formStore(event) {
     notes: $form.elements.notes.value,
     entryId: data.nextEntryId
   };
-  data.nextEntryId++;
-  data.entries.unshift(entry);
-  $imgSrc.setAttribute('src', 'images/placeholder-image-square.jpg');
+  if (data.editing === null) {
+    data.nextEntryId++;
+    data.entries.unshift(entry);
+    $imgSrc.setAttribute('src', 'images/placeholder-image-square.jpg');
 
-  $ul.prepend(renderEntry(entry));
+    $ul.prepend(renderEntry(entry));
+  } else {
+    const originalEntryId = entry.entryId;
+    const editedEntry = {
+      entryId: data.editing.entryId,
+      title: $form.elements.title.value,
+      photoUrl: $form.elements['photo-url'].value,
+      notes: $form.elements.notes.value
+    };
+    data.entries.entryId = editedEntry.entryId;
+    data.entries[originalEntryId] = editedEntry;
+
+    const $originalEntryDOM = document.querySelector('li[data-entry-id="' + editedEntry.entryId + '"]');
+    const $editedEntryDom = renderEntry(editedEntry);
+    $originalEntryDOM.replaceWith($editedEntryDom);
+
+    const $entryFormh1 = document.querySelector('.new-entry h1');
+    $entryFormh1.textContent = 'New Entry';
+    data.editing = null;
+  }
   viewSwap('entries');
   toggleNoEntries();
-
   $form.reset();
 }
 
