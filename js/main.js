@@ -32,6 +32,7 @@ $form.addEventListener('submit', formStore);
 
 function renderEntry(entry) {
   const $entryRendered = document.createElement('li');
+  $entryRendered.setAttribute('data-entry-id', entry.entryId);
 
   const $divRow = document.createElement('div');
   $divRow.classList.add('row');
@@ -53,6 +54,9 @@ function renderEntry(entry) {
   const $h1 = document.createElement('h1');
   $h1.textContent = entry.title;
   $divHalf2.appendChild($h1);
+  const $pencil = document.createElement('i');
+  $pencil.classList.add('fa-solid', 'fa-pencil');
+  $h1.appendChild($pencil);
 
   const $p = document.createElement('p');
   $p.textContent = entry.notes;
