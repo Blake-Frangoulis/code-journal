@@ -67,7 +67,7 @@ function renderEntry(entry) {
   $divHalf1.appendChild($img);
 
   const $divHalf2 = document.createElement('div');
-  $divHalf1.classList.add('column-half');
+  $divHalf2.classList.add('column-half');
   $divRow.appendChild($divHalf2);
 
   const $h1 = document.createElement('h1');

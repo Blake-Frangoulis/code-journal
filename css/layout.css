@@ -168,5 +168,10 @@ li {
 
 .fa-pencil {
   color: #562b81;
-  margin-left: 17rem;
+}
+
+li > .row > .column-half > h1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
