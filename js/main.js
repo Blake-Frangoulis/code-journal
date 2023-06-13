@@ -23,7 +23,6 @@ function formStore(event) {
     $imgSrc.setAttribute('src', 'images/placeholder-image-square.jpg');
 
     $ul.prepend(renderEntry(entry));
-    return;
   } else {
     const originalEntryId = data.editing.entryId;
     const editedEntry = {
