@@ -17,14 +17,37 @@ function formStore(event) {
     notes: $form.elements.notes.value,
     entryId: data.nextEntryId
   };
-  data.nextEntryId++;
-  data.entries.unshift(entry);
-  $imgSrc.setAttribute('src', 'images/placeholder-image-square.jpg');
+  if (data.editing === null) {
+    data.nextEntryId++;
+    data.entries.unshift(entry);
+    $imgSrc.setAttribute('src', 'images/placeholder-image-square.jpg');
 
-  $ul.prepend(renderEntry(entry));
+    $ul.prepend(renderEntry(entry));
+  } else {
+    const originalEntryId = data.editing.entryId;
+    const editedEntry = {
+      entryId: originalEntryId,
+      title: $form.elements.title.value,
+      photoUrl: $form.elements['photo-url'].value,
+      notes: $form.elements.notes.value
+    };
+
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === originalEntryId) {
+        data.entries[i] = editedEntry;
+      }
+    }
+
+    const $originalEntryDOM = document.querySelector('li[data-entry-id="' + editedEntry.entryId + '"]');
+    const $editedEntryDom = renderEntry(editedEntry);
+    $originalEntryDOM.replaceWith($editedEntryDom);
+
+    const $entryFormh1 = document.querySelector('.new-entry h1');
+    $entryFormh1.textContent = 'New Entry';
+    data.editing = null;
+  }
   viewSwap('entries');
   toggleNoEntries();
-
   $form.reset();
 }
 
@@ -32,6 +55,7 @@ $form.addEventListener('submit', formStore);
 
 function renderEntry(entry) {
   const $entryRendered = document.createElement('li');
+  $entryRendered.setAttribute('data-entry-id', entry.entryId);
 
   const $divRow = document.createElement('div');
   $divRow.classList.add('row');
@@ -47,12 +71,15 @@ function renderEntry(entry) {
   $divHalf1.appendChild($img);
 
   const $divHalf2 = document.createElement('div');
-  $divHalf1.classList.add('column-half');
+  $divHalf2.classList.add('column-half');
   $divRow.appendChild($divHalf2);
 
   const $h1 = document.createElement('h1');
   $h1.textContent = entry.title;
   $divHalf2.appendChild($h1);
+  const $pencil = document.createElement('i');
+  $pencil.classList.add('fa-solid', 'fa-pencil');
+  $h1.appendChild($pencil);
 
   const $p = document.createElement('p');
   $p.textContent = entry.notes;
@@ -66,6 +93,28 @@ document.addEventListener('DOMContentLoaded', function (event) {
   for (let i = 0; i < data.entries.length; i++) {
     const output = renderEntry(data.entries[i]);
     $ul.appendChild(output);
+  }
+  viewSwap(data.view);
+  toggleNoEntries();
+});
+
+$ul.addEventListener('click', () => {
+  const pencilIcon = event.target.closest('.fa-pencil');
+  if (pencilIcon) {
+    const selectedLi = pencilIcon.closest('li');
+    const selectedEntryId = selectedLi.getAttribute('data-entry-id');
+    for (let i = 0; i < data.entries.length; i++) {
+      const selectedEntry = data.entries[i];
+      if (data.entries[i].entryId === parseInt(selectedEntryId)) {
+        viewSwap('entry-form');
+        data.editing = selectedEntry;
+        $form.elements.title.value = selectedEntry.title;
+        $form.elements['photo-url'].value = selectedEntry.photoUrl;
+        $form.elements.notes.value = selectedEntry.notes;
+        const $entryFormh1 = document.querySelector('.new-entry h1');
+        $entryFormh1.textContent = 'Edit Entry';
+      }
+    }
   }
   viewSwap(data.view);
   toggleNoEntries();
