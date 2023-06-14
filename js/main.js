@@ -1,5 +1,10 @@
 const $imgInput = document.querySelector('#photo-url');
 const $imgSrc = document.querySelector('#img');
+const $deleteButton = document.querySelector('#delete-entry');
+const $cancelButton = document.querySelector('#cancel-button');
+// const $confirmButton = document.querySelector('#confirm-button');
+const $modal = document.querySelector('.modal');
+const $overlay = document.querySelector('.overlay');
 
 function imgChange(event) {
   $imgSrc.setAttribute('src', event.target.value);
@@ -98,8 +103,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
   toggleNoEntries();
 });
 
-$ul.addEventListener('click', () => {
+$ul.addEventListener('click', event => {
   const pencilIcon = event.target.closest('.fa-pencil');
+  // const deleteButton = event.target.closest('#delete-entry');
   if (pencilIcon) {
     const selectedLi = pencilIcon.closest('li');
     const selectedEntryId = selectedLi.getAttribute('data-entry-id');
@@ -112,12 +118,13 @@ $ul.addEventListener('click', () => {
         $form.elements['photo-url'].value = selectedEntry.photoUrl;
         $form.elements.notes.value = selectedEntry.notes;
         const $entryFormh1 = document.querySelector('.new-entry h1');
+        $deleteButton.classList.remove('hidden');
         $entryFormh1.textContent = 'Edit Entry';
       }
     }
+    viewSwap(data.view);
+    toggleNoEntries();
   }
-  viewSwap(data.view);
-  toggleNoEntries();
 });
 
 const $noEntries = document.querySelector('.no-entries');
@@ -151,4 +158,18 @@ $entriesAnchor.addEventListener('click', function (event) {
 const $newButton = document.querySelector('#new-button');
 $newButton.addEventListener('click', function (event) {
   viewSwap('entry-form');
+});
+
+function modalToggleOn(event) {
+  $modal.classList.toggle('on');
+  $overlay.classList.toggle('on');
+}
+
+$deleteButton.addEventListener('click', function (event) {
+  event.stopPropagation();
+  modalToggleOn(event);
+});
+
+$cancelButton.addEventListener('click', function (event) {
+  modalToggleOn(event);
 });
