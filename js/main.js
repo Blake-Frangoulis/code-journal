@@ -2,7 +2,7 @@ const $imgInput = document.querySelector('#photo-url');
 const $imgSrc = document.querySelector('#img');
 const $deleteButton = document.querySelector('#delete-entry');
 const $cancelButton = document.querySelector('#cancel-button');
-// const $confirmButton = document.querySelector('#confirm-button');
+const $confirmButton = document.querySelector('#confirm-button');
 const $modal = document.querySelector('.modal');
 const $overlay = document.querySelector('.overlay');
 
@@ -104,8 +104,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
 });
 
 $ul.addEventListener('click', event => {
+  // console.log(data.editing);
   const pencilIcon = event.target.closest('.fa-pencil');
-  // const deleteButton = event.target.closest('#delete-entry');
   if (pencilIcon) {
     const selectedLi = pencilIcon.closest('li');
     const selectedEntryId = selectedLi.getAttribute('data-entry-id');
@@ -166,10 +166,27 @@ function modalToggleOn(event) {
 }
 
 $deleteButton.addEventListener('click', function (event) {
-  event.stopPropagation();
   modalToggleOn(event);
+  // console.log(data.editing);
 });
 
 $cancelButton.addEventListener('click', function (event) {
   modalToggleOn(event);
+});
+
+$confirmButton.addEventListener('click', function (event) {
+  // console.log(data.editing);
+  const entryToDelete = data.editing;
+  const entryToDeleteId = entryToDelete.entryId;
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === entryToDeleteId) {
+      data.entries.splice(i, 1);
+      const $entryToDelete = document.querySelector('li[data-entry-id="' + entryToDeleteId + '"]');
+      $entryToDelete.remove();
+      // console.log($entryToDelete);
+    }
+  }
+  toggleNoEntries();
+  modalToggleOn(event);
+  viewSwap('entries');
 });
