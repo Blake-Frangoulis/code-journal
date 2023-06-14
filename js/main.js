@@ -104,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
 });
 
 $ul.addEventListener('click', event => {
-  // console.log(data.editing);
   const pencilIcon = event.target.closest('.fa-pencil');
   if (pencilIcon) {
     const selectedLi = pencilIcon.closest('li');
@@ -167,7 +166,6 @@ function modalToggleOn(event) {
 
 $deleteButton.addEventListener('click', function (event) {
   modalToggleOn(event);
-  // console.log(data.editing);
 });
 
 $cancelButton.addEventListener('click', function (event) {
@@ -175,7 +173,6 @@ $cancelButton.addEventListener('click', function (event) {
 });
 
 $confirmButton.addEventListener('click', function (event) {
-  // console.log(data.editing);
   const entryToDelete = data.editing;
   const entryToDeleteId = entryToDelete.entryId;
   for (let i = 0; i < data.entries.length; i++) {
@@ -183,7 +180,7 @@ $confirmButton.addEventListener('click', function (event) {
       data.entries.splice(i, 1);
       const $entryToDelete = document.querySelector('li[data-entry-id="' + entryToDeleteId + '"]');
       $entryToDelete.remove();
-      // console.log($entryToDelete);
+      data.editing = null;
     }
   }
   toggleNoEntries();
